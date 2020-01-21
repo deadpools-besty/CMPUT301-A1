@@ -2,7 +2,7 @@ package com.example.android.cardiobook;
 
 public class BloodPressure {
 
-    int value;
+    protected int value;
 
     void setBP(int BP) {
         value = BP;
