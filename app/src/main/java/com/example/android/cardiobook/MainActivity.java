@@ -2,7 +2,6 @@ package com.example.android.cardiobook;
 
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
-
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
