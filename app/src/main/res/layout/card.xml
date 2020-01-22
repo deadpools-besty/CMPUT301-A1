@@ -14,61 +14,56 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_margin="4dp" >
+            android:layout_margin="4dp">
 
             <TextView
+                android:id="@+id/measDate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
                 android:layout_alignParentLeft="true"
-                android:id="@+id/Date"
+                android:layout_alignParentTop="true"
                 android:text="Date"
                 android:textSize="20sp"
-                android:textStyle="bold"
-                />
+                android:textStyle="bold" />
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
                 android:id="@+id/Time"
-                android:text="Time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/measDate"
                 android:layout_alignParentRight="true"
+                android:text="Time"
                 android:textSize="12sp"
-                android:layout_below="@id/Date"
 
                 />
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
                 android:id="@+id/sysBP"
-                android:text="Systolic Blood Pressure"
-                android:textSize="15sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_below="@id/Time"
-                />
+                android:text="Systolic Blood Pressure"
+                android:textSize="15sp" />
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
                 android:id="@+id/diaBP"
-                android:text="Diastolic Blood Pressure"
-                android:textSize="15sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_below="@id/sysBP"
-                />
+                android:text="Diastolic Blood Pressure"
+                android:textSize="15sp" />
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
                 android:id="@+id/heartRate"
-                android:text="Heart Rate"
-                android:textSize="15sp"
-                android:layout_below="@id/diaBP"
-                />
-            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_below="@id/diaBP"
+                android:text="Heart Rate"
+                android:textSize="15sp" />
+            <TextView
                 android:id="@+id/Comment"
-                android:text="Comment"
-                android:textSize="15sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_below="@id/heartRate"
-                />
+                android:text="Comment"
+                android:textSize="15sp" />
 
 
         </RelativeLayout>

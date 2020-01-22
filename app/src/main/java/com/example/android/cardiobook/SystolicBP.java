@@ -4,9 +4,6 @@ public class SystolicBP extends BloodPressure {
 
     public boolean isUnusual() {
 
-        if (value > 140 || value < 90) {
-            return true;
-        }
-        else return false;
+        return value > 140 || value < 90;
     }
 }
