@@ -42,11 +42,16 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
         Date mDate = measurement.getDate();
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         String strDate = dateFormat.format(mDate);
-        holder.measDate.setText(strDate);
+        holder.mDate.setText(strDate);
 
         // Time formatting and view binding
         DateFormat timeFormat = new SimpleDateFormat("hh:mm");
         String strTime = timeFormat.format(mDate);
+        holder.mTime.setText(strTime);
+
+        // View binding for diastolic and systolic BP
+        holder.mDia.setText("Diastolic Blood Pressure: " + measurement.getDiastolicBP());
+        holder.mDia.setText("Systolic Blood Pressure: " + measurement.getDiastolicBP());
 
 
 
@@ -59,13 +64,17 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
 
     class MyViewHolder extends RecyclerView.ViewHolder {
 
-        TextView mDate, mDia, mSys, mHR, mTime;
+        TextView mDate, mDia, mSys, mHR, mTime, mComment;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
-            tweetMessage = itemView.findViewById(R.id.TweetMessage);
-            date = itemView.findViewById(R.id.Date);
+            mDate = itemView.findViewById(R.id.measDate);
+            mTime = itemView.findViewById(R.id.Time);
+            mDia = itemView.findViewById(R.id.diaBP);
+            mSys = itemView.findViewById(R.id.sysBP);
+            mHR = itemView.findViewById(R.id.heartRate);
+            mComment = itemView.findViewById(R.id.Comment);
+
         }
     }
-} {
 }
