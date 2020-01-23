@@ -26,7 +26,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
 
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        //inflating and returning our view holder
+        //inflating and returning view holder
         LayoutInflater inflater = LayoutInflater.from(mCtx);
         View view = inflater.inflate(R.layout.card, null);
         return new MyViewHolder(view);
@@ -50,11 +50,18 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
         holder.mTime.setText(strTime);
 
         // View binding for diastolic and systolic BP
-        holder.mDia.setText("Diastolic Blood Pressure: " + measurement.getDiastolicBP());
-        holder.mDia.setText("Systolic Blood Pressure: " + measurement.getDiastolicBP());
+        String diaBP = "Diastolic Blood Pressure: " + measurement.getDiastolicBP();
+        String sysBP = "Systolic Blood Pressure: " + measurement.getDiastolicBP();
+        holder.mDia.setText(diaBP);
+        holder.mSys.setText(sysBP);
 
+        // View binding for heart rate
+        String HR = "Heart rate: " + measurement.getHeartRate();
+        holder.mHR.setText(HR);
 
-
+        // View binding for the comment
+        String comment = "Comment: " + measurement.getComment();
+        holder.mComment.setText(comment);
     }
 
     @Override

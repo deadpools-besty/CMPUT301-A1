@@ -1,35 +1,46 @@
 package com.example.android.cardiobook;
 
+import androidx.annotation.Nullable;
+
 import java.util.Date;
 
 public class Measurement {
 
     private Date date;
+    private Date time;
     private BloodPressure systolicBP = new SystolicBP();
     private BloodPressure diastolicBP = new DiastolicBP();
+    private int heartRate;
+    private String comment;
 
-    public Measurement(Date date, BloodPressure systolicBP, BloodPressure diastolicBP, int heartRate, String comment) {
-        this.date = date;
-        this.systolicBP = systolicBP;
-        this.diastolicBP = diastolicBP;
+
+    Measurement(int systolicBP, int diastolicBP, int heartRate, @Nullable String comment) {
+        this.date = new Date();
+        this.systolicBP.setBP(systolicBP);
+        this.diastolicBP.setBP(diastolicBP);
         this.heartRate = heartRate;
         this.comment = comment;
     }
 
-    public Measurement(Date date, BloodPressure systolicBP, BloodPressure diastolicBP, int heartRate) {
-        this.date = date;
-        this.systolicBP = systolicBP;
-        this.diastolicBP = diastolicBP;
+    public int getHeartRate() {
+        return heartRate;
+    }
+
+    public void setHeartRate(int heartRate) {
         this.heartRate = heartRate;
     }
 
-    private int heartRate;
-    private String comment;
+    public String getComment() {
+        return comment;
+    }
+
+    public void setComment(String comment) {
+        this.comment = comment;
+    }
 
     public Date getDate() {
         return date;
     }
-
     void setDate(Date date) {
         this.date = date;
     }
