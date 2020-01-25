@@ -1,4 +1,10 @@
 <resources>
     <string name="app_name">CardioBook</string>
     <string name="Diastolic_BP"></string>
+    <string name="date">Date</string>
+    <string name="time">Time</string>
+    <string name="systolic_blood_pressure">Systolic Blood Pressure</string>
+    <string name="diastolic_blood_pressure">Diastolic Blood Pressure</string>
+    <string name="heart_rate">Heart Rate</string>
+    <string name="comment">Comment</string>
 </resources>

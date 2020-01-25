@@ -51,7 +51,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
 
         // View binding for diastolic and systolic BP
         String diaBP = "Diastolic Blood Pressure: " + measurement.getDiastolicBP();
-        String sysBP = "Systolic Blood Pressure: " + measurement.getDiastolicBP();
+        String sysBP = "Systolic Blood Pressure: " + measurement.getSystolicBP();
         holder.mDia.setText(diaBP);
         holder.mSys.setText(sysBP);
 

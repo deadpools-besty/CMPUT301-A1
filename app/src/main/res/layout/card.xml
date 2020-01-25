@@ -14,7 +14,8 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_margin="4dp">
+            android:layout_margin="4dp"
+            android:padding="5dp">
 
             <TextView
                 android:id="@+id/measDate"
@@ -22,8 +23,8 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentTop="true"
-                android:text="Date"
-                android:textSize="20sp"
+                android:text="@string/date"
+                android:textSize="25sp"
                 android:textStyle="bold" />
 
             <TextView
@@ -32,7 +33,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/measDate"
                 android:layout_alignParentRight="true"
-                android:text="Time"
+                android:text="@string/time"
                 android:textSize="12sp"
 
                 />
@@ -40,34 +41,37 @@
                 android:id="@+id/sysBP"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/Time"
-                android:text="Systolic Blood Pressure"
+                android:layout_below="@id/measDate"
+                android:text="@string/systolic_blood_pressure"
+                android:layout_marginLeft="5dp"
                 android:textSize="15sp" />
             <TextView
                 android:id="@+id/diaBP"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/sysBP"
-                android:text="Diastolic Blood Pressure"
+                android:layout_marginLeft="5dp"
+                android:text="@string/diastolic_blood_pressure"
                 android:textSize="15sp" />
             <TextView
                 android:id="@+id/heartRate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/diaBP"
-                android:text="Heart Rate"
+                android:layout_marginLeft="5dp"
+                android:text="@string/heart_rate"
                 android:textSize="15sp" />
             <TextView
                 android:id="@+id/Comment"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/heartRate"
-                android:text="Comment"
+                android:text="@string/comment"
+                android:layout_marginLeft="5dp"
                 android:textSize="15sp" />
 
 
         </RelativeLayout>
-
 
     </androidx.cardview.widget.CardView>
 
