@@ -14,26 +14,26 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
-public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
+public class MeasurementAdapter extends RecyclerView.Adapter<MeasurementAdapter.MeasurementViewHolder> {
 
     private Context mCtx;
     private List<Measurement> measurementList;
 
-    public MyAdapter(Context mCtx, List<Measurement> measurementList) {
+    public MeasurementAdapter(Context mCtx, List<Measurement> measurementList) {
         this.mCtx = mCtx;
         this.measurementList = measurementList;
     }
 
     @Override
-    public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public MeasurementViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         //inflating and returning view holder
         LayoutInflater inflater = LayoutInflater.from(mCtx);
         View view = inflater.inflate(R.layout.card, null);
-        return new MyViewHolder(view);
+        return new MeasurementViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(MyViewHolder holder, int position) {
+    public void onBindViewHolder(MeasurementViewHolder holder, int position) {
 
 
         Measurement measurement = measurementList.get(position);
@@ -69,11 +69,12 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
         return measurementList.size();
     }
 
-    class MyViewHolder extends RecyclerView.ViewHolder {
+
+    class MeasurementViewHolder extends RecyclerView.ViewHolder {
 
         TextView mDate, mDia, mSys, mHR, mTime, mComment;
 
-        public MyViewHolder(@NonNull View itemView) {
+        public MeasurementViewHolder(@NonNull View itemView) {
             super(itemView);
             mDate = itemView.findViewById(R.id.measDate);
             mTime = itemView.findViewById(R.id.Time);

@@ -6,6 +6,7 @@ import android.view.MenuInflater;
 import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -48,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(layoutManager);
 
         // specify an adapter (see also next example)
-        MyAdapter adapter = new MyAdapter(this, measurements);
+        MeasurementAdapter adapter = new MeasurementAdapter(this, measurements);
         recyclerView.setAdapter(adapter);
     }
 
