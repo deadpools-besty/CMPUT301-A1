@@ -3,9 +3,4 @@
     <style name="AppTheme" parent="Theme.AppCompat.DayNight">
         <!-- ... -->
     </style>
-
-    <style name="FullScreenDialogTheme" parent="Theme.AppCompat.DayNight.NoActionBar">
-        <item name="android:windowAnimationStyle">@style/Animation.Design.BottomSheetDialog</item>
-
-    </style>
 </resources>
