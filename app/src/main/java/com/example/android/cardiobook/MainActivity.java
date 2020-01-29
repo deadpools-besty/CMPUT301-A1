@@ -7,6 +7,7 @@ import android.view.MenuInflater;
 import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.DialogFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -31,14 +32,14 @@ public class MainActivity extends AppCompatActivity {
 
         // Set up floating action button
         FloatingActionButton fab = findViewById(R.id.fab);
-        /*fab.setOnClickListener(new View.OnClickListener() {
+        fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                addMeasurement(view);
+                DialogFragment addDialog = AddMeasurementDialog.newInstance();
                 Snackbar.make(view, "Here's a Snackbar", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
             }
-        }); */
+        });
         measurements.add(measurement1);
         measurements.add(measurement2);
 
@@ -60,11 +61,5 @@ public class MainActivity extends AppCompatActivity {
         inflater.inflate(R.menu.menu_main, menu);
         return true;
     }
-
-    public void addMeasurement(View view) {
-        Intent intent = new Intent(this, AddMeasurementDialog.class);
-        startActivity(intent);
-    }
-
 
 }
