@@ -33,7 +33,8 @@ public class MainActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                AddMeasurementDialog addMeasurement = new AddMeasurementDialog();
+                addMeasurement.show(getSupportFragmentManager(), "Add");
                 Snackbar.make(view, "Here's a Snackbar", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
             }
