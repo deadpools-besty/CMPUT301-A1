@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.AdapterView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -21,11 +22,12 @@ import com.google.gson.reflect.TypeToken;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity implements AddMeasurementDialog.OnFragmentInteractionListener {
+public class MainActivity extends AppCompatActivity implements AddMeasurementDialog.OnFragmentInteractionListener, EditMeasurementFragment.OnFragmentInteractionListener {
 
     private RecyclerView recyclerView;
     private RecyclerView.LayoutManager layoutManager;
     private ArrayList<Measurement> measurements;
+    private int editItemPosition;
     MeasurementAdapter adapter;
     SharedPreferences sharedPreferences;
 
@@ -33,6 +35,9 @@ public class MainActivity extends AppCompatActivity implements AddMeasurementDia
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        // load data
+        readMeasurements();
 
         // Set up floating action button
         FloatingActionButton fab = findViewById(R.id.fab);
@@ -43,9 +48,6 @@ public class MainActivity extends AppCompatActivity implements AddMeasurementDia
             }
         });
 
-        // load data
-        readMeasurements();
-
         // build RecyclerView
         adapter = new MeasurementAdapter(this, measurements);
         recyclerView = findViewById(R.id.recycleView);
@@ -54,36 +56,29 @@ public class MainActivity extends AppCompatActivity implements AddMeasurementDia
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
 
+        // itemclick listener to edit items
+        adapter.setOnItemClickListener(new MeasurementAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(int position) {
+                editItemPosition = position;
+                Measurement item = measurements.get(position);
+                FragmentTransaction fm = getSupportFragmentManager().beginTransaction();
+                EditMeasurementFragment measurementFragment = EditMeasurementFragment.newInstance(item);
+                measurementFragment.show(fm, "EDIT");
+            }
+        });
+
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menu_main, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.deleteMeasurement:
-                adapter.setOnItemClickListener(new MeasurementAdapter.OnItemClickListener() {
-                    @Override
-                    public void onItemClick(int position) {
-                        measurements.remove(position);
-                        adapter.notifyDataSetChanged();
-                    }
-                });
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
-    }
 
     // initialize add measurement dialog
     public void add() {
         AddMeasurementDialog addMeasurement = new AddMeasurementDialog();
         addMeasurement.show(getSupportFragmentManager(), "Add");
+    }
+    public void edit(int position) {
+
+
     }
 
     private void saveMeasurements() {
@@ -117,4 +112,10 @@ public class MainActivity extends AppCompatActivity implements AddMeasurementDia
         saveMeasurements();
     }
 
+    @Override
+    public void onEditPressed(Measurement measurement) {
+        measurements.set(editItemPosition, measurement);
+        adapter.notifyDataSetChanged();
+        saveMeasurements();
+    }
 }

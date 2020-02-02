@@ -66,7 +66,6 @@ public class MeasurementAdapter extends RecyclerView.Adapter<MeasurementAdapter.
         if (measurement.getDiastolicBP().isUnusual()) {
             holder.mDia.setTextColor(Color.parseColor("#D50000"));
         }
-
         if (measurement.getSystolicBP().isUnusual()) {
             holder.mSys.setTextColor(Color.parseColor("#D50000"));
         }

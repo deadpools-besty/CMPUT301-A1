@@ -11,8 +11,6 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import android.view.Window;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -26,25 +24,35 @@ import androidx.fragment.app.DialogFragment;
 
 import java.util.Calendar;
 
-public class AddMeasurementDialog extends DialogFragment {
+public class EditMeasurementFragment extends DialogFragment {
 
 
-    private OnFragmentInteractionListener listener;
+    private EditMeasurementFragment.OnFragmentInteractionListener listener;
     private TextView date;
     private TextView time;
     private EditText HR, dBP, sBP, comment;
-    DatePickerDialog.OnDateSetListener dateSetListener;
-    TimePickerDialog.OnTimeSetListener timeSetListener;
+    private Measurement measurementObject;
+    private DatePickerDialog.OnDateSetListener dateSetListener;
+    private TimePickerDialog.OnTimeSetListener timeSetListener;
 
     public interface OnFragmentInteractionListener {
-        void onAddPressed(Measurement newMeasurement);
+        void onEditPressed(Measurement measurement);
+    }
+
+    static EditMeasurementFragment newInstance(Measurement measurement) {
+        Bundle args = new Bundle();
+        args.putSerializable("measurements", measurement);
+        EditMeasurementFragment fragment = new EditMeasurementFragment();
+        fragment.setArguments(args);
+        return fragment;
+
     }
 
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        if(context instanceof  OnFragmentInteractionListener){
-            listener = (OnFragmentInteractionListener) context;
+        if(context instanceof EditMeasurementFragment.OnFragmentInteractionListener){
+            listener = (EditMeasurementFragment.OnFragmentInteractionListener) context;
         }
         else {
             throw new RuntimeException(context.toString() + "must implement OnFragmentInteractionListener");
@@ -65,15 +73,24 @@ public class AddMeasurementDialog extends DialogFragment {
         sBP = view.findViewById(R.id.systolicBPEditText);
         comment = view.findViewById(R.id.commentEditText);
 
+        // grabbing and binding data from existing measurement object
+        assert getArguments() != null;
+        measurementObject = (Measurement) getArguments().getSerializable("measurements");
+        date.setText(measurementObject.getDate());
+        time.setText(measurementObject.getTime());
+        Log.d("MeasHR", "onCreateDialog: " + measurementObject.getHeartRate());
+        HR.setText(String.valueOf(measurementObject.getHeartRate()));
+        dBP.setText(String.valueOf(measurementObject.getDiastolicBP().getBP()));
+        sBP.setText(String.valueOf(measurementObject.getSystolicBP().getBP()));
+        comment.setText(measurementObject.getComment());
+
         // Calendar stuff
         Calendar cal = Calendar.getInstance();
         final int year = cal.get(Calendar.YEAR);
-        final int month = cal.get(Calendar.MONTH);
+        final int month = cal.get(Calendar.MONTH) + 1;
         final int day = cal.get(Calendar.DAY_OF_MONTH);
         final int currentHour = cal.get(Calendar.HOUR_OF_DAY);
         final int currentMinute = cal.get(Calendar.MINUTE);
-        date.setText(year + "-" + month + "-" + day);
-        time.setText(currentHour + ":" + currentMinute);
 
 
         // on click listener to be able to set the date
@@ -82,7 +99,8 @@ public class AddMeasurementDialog extends DialogFragment {
             @Override
             public void onClick(View v) {
                 DatePickerDialog dateDialog = new DatePickerDialog(
-                        getContext(), dateSetListener,
+                        getContext(),
+                        dateSetListener,
                         year, month, day);
                 dateDialog.show();
 
@@ -91,7 +109,6 @@ public class AddMeasurementDialog extends DialogFragment {
         dateSetListener = new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                month += 1;
                 String dateStr = year + "-" + month + "-" + dayOfMonth;
                 date.setText(dateStr);
             }
@@ -119,14 +136,15 @@ public class AddMeasurementDialog extends DialogFragment {
                 .setView(view)
                 .setTitle("Add Measurement")
                 .setNegativeButton("Cancel", null)
-                .setPositiveButton("Add", new DialogInterface.OnClickListener() {
+                .setPositiveButton("Edit", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         // build the new measurement object given the values
+
+
                         String dateStr = date.getText().toString();
                         String timeStr = time.getText().toString();
 
-                        //error checking for if user does not input values
                         boolean validHR = !HR.getText().toString().isEmpty();
                         boolean validdBP = !dBP.getText().toString().isEmpty();
                         boolean validsBP = !sBP.getText().toString().isEmpty();
@@ -140,13 +158,12 @@ public class AddMeasurementDialog extends DialogFragment {
                             int sBPInt = Integer.valueOf(sBP.getText().toString());
 
                             if (comment.getText().toString().isEmpty()) {
-                                listener.onAddPressed(new Measurement(dateStr, timeStr, sBPInt, dBPInt, HRInt));
+                                listener.onEditPressed(new Measurement(dateStr, timeStr, sBPInt, dBPInt, HRInt));
                             } else {
                                 String commentStr = comment.getText().toString();
-                                listener.onAddPressed(new Measurement(dateStr, timeStr, sBPInt, dBPInt, HRInt, commentStr));
+                                listener.onEditPressed(new Measurement(dateStr, timeStr, sBPInt, dBPInt, HRInt, commentStr));
                             }
                         }
-
                     }
                 }).create();
 
@@ -188,5 +205,5 @@ public class AddMeasurementDialog extends DialogFragment {
         }
     }
 
-}
 
+}
