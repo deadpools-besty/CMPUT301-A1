@@ -63,7 +63,7 @@
         android:id="@+id/commentEditText"
         android:ems="10"
         android:hint="Add a comment"
-        android:inputType="number"/>
+        />
 
 
 </LinearLayout>
