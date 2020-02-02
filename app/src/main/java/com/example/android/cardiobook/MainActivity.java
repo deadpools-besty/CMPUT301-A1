@@ -14,14 +14,14 @@ import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements AddMeasurementDialog.OnFragmentInteractionListener {
 
     private RecyclerView recyclerView;
     private RecyclerView.LayoutManager layoutManager;
-    private Measurement measurement1 = new Measurement(58, 90, 155, "First");
-    private Measurement measurement2 = new Measurement(85, 93, 132, "Second");
+
 
     private ArrayList<Measurement> measurements = new ArrayList<>();
+    MeasurementAdapter adapter = new MeasurementAdapter(this, measurements);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,24 +33,16 @@ public class MainActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                AddMeasurementDialog addMeasurement = new AddMeasurementDialog();
-                addMeasurement.show(getSupportFragmentManager(), "Add");
-                Snackbar.make(view, "Here's a Snackbar", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                add();
             }
         });
-        measurements.add(measurement1);
-        measurements.add(measurement2);
-
-        recyclerView = (RecyclerView) findViewById(R.id.recycleView);
+        recyclerView = findViewById(R.id.recycleView);
         recyclerView.setHasFixedSize(true);
 
         // use a linear layout manager
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
 
-        // specify an adapter (see also next example)
-        MeasurementAdapter adapter = new MeasurementAdapter(this, measurements);
         recyclerView.setAdapter(adapter);
     }
 
@@ -59,6 +51,19 @@ public class MainActivity extends AppCompatActivity {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.menu_main, menu);
         return true;
+    }
+
+    // initialize add measurement dialog
+    public void add() {
+        AddMeasurementDialog addMeasurement = new AddMeasurementDialog();
+        addMeasurement.show(getSupportFragmentManager(), "Add");
+    }
+
+    // handle onClickListener for add measurement dialog fragment
+    @Override
+    public void onAddPressed(Measurement newMeasurement) {
+        measurements.add(newMeasurement);
+        adapter.notifyDataSetChanged();
     }
 
 }

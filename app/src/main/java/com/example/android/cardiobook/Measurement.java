@@ -2,20 +2,30 @@ package com.example.android.cardiobook;
 
 import androidx.annotation.Nullable;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Measurement {
+public class Measurement implements Serializable {
 
-    private Date date;
-    private Date time;
+    private String date;
+    private String time;
     private BloodPressure systolicBP = new SystolicBP();
     private BloodPressure diastolicBP = new DiastolicBP();
     private int heartRate;
     private String comment;
 
 
-    Measurement(int systolicBP, int diastolicBP, int heartRate, @Nullable String comment) {
-        this.date = new Date();
+    Measurement(String date, String time, int systolicBP, int diastolicBP, int heartRate) {
+        this.date = date;
+        this.time = time;
+        this.systolicBP.setBP(systolicBP);
+        this.diastolicBP.setBP(diastolicBP);
+        this.heartRate = heartRate;
+    }
+
+    public Measurement(String date, String time, int systolicBP, int diastolicBP, int heartRate, String comment) {
+        this.date = date;
+        this.time = time;
         this.systolicBP.setBP(systolicBP);
         this.diastolicBP.setBP(diastolicBP);
         this.heartRate = heartRate;
@@ -38,24 +48,33 @@ public class Measurement {
         this.comment = comment;
     }
 
-    public Date getDate() {
+    public String getDate() {
         return date;
     }
-    void setDate(Date date) {
+
+    public void setDate(String date) {
         this.date = date;
     }
 
-    void setSystolicBP(int BP) {
+    public String getTime() {
+        return time;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
+    }
+
+    public void setSystolicBP(int BP) {
         systolicBP.setBP(BP);
     }
-    public int getSystolicBP() {
-        return systolicBP.getBP();
+    public SystolicBP getSystolicBP() {
+        return (SystolicBP) systolicBP;
     }
-    void setDiastolicBPBP(int BP) {
+    public void setDiastolicBP(int BP) {
         diastolicBP.setBP(BP);
     }
-    public int getDiastolicBP() {
-        return diastolicBP.getBP();
+    public DiastolicBP getDiastolicBP() {
+        return (DiastolicBP) diastolicBP;
     }
 
 

@@ -1,6 +1,7 @@
 package com.example.android.cardiobook;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -39,21 +40,26 @@ public class MeasurementAdapter extends RecyclerView.Adapter<MeasurementAdapter.
         Measurement measurement = measurementList.get(position);
 
         // Date formatting and view binding
-        Date mDate = measurement.getDate();
-        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        String strDate = dateFormat.format(mDate);
-        holder.mDate.setText(strDate);
+        String mDate = measurement.getDate();
+        holder.mDate.setText(mDate);
 
         // Time formatting and view binding
-        DateFormat timeFormat = new SimpleDateFormat("hh:mm");
-        String strTime = timeFormat.format(mDate);
-        holder.mTime.setText(strTime);
+        holder.mTime.setText(measurement.getTime());
 
         // View binding for diastolic and systolic BP
-        String diaBP = "Diastolic Blood Pressure: " + measurement.getDiastolicBP();
-        String sysBP = "Systolic Blood Pressure: " + measurement.getSystolicBP();
+        String diaBP = "Diastolic Blood Pressure: " + measurement.getDiastolicBP().getBP();
+        String sysBP = "Systolic Blood Pressure: " + measurement.getSystolicBP().getBP();
         holder.mDia.setText(diaBP);
         holder.mSys.setText(sysBP);
+
+        // highlight text if BP is unusual
+        if (measurement.getDiastolicBP().isUnusual()) {
+            holder.mDia.setTextColor(Color.parseColor("#D50000"));
+        }
+
+        if (measurement.getSystolicBP().isUnusual()) {
+            holder.mSys.setTextColor(Color.parseColor("#D50000"));
+        }
 
         // View binding for heart rate
         String HR = "Heart rate: " + measurement.getHeartRate();

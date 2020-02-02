@@ -2,3 +2,8 @@
 CCID: nandoh
 
 Name: Nana Andoh
+
+Citations:
+
+- Belal Khan - Android RecyclerView and CardView tutorial - https://www.simplifiedcoding.net/android-recyclerview-cardview-tutorial/
+- 
