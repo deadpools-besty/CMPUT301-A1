@@ -9,8 +9,8 @@ public class Measurement implements Serializable {
 
     private String date;
     private String time;
-    private BloodPressure systolicBP = new SystolicBP();
-    private BloodPressure diastolicBP = new DiastolicBP();
+    private SystolicBP systolicBP = new SystolicBP();
+    private DiastolicBP diastolicBP = new DiastolicBP();
     private int heartRate;
     private String comment;
 
@@ -21,6 +21,7 @@ public class Measurement implements Serializable {
         this.systolicBP.setBP(systolicBP);
         this.diastolicBP.setBP(diastolicBP);
         this.heartRate = heartRate;
+        this.comment = " ";
     }
 
     public Measurement(String date, String time, int systolicBP, int diastolicBP, int heartRate, String comment) {
@@ -68,13 +69,13 @@ public class Measurement implements Serializable {
         systolicBP.setBP(BP);
     }
     public SystolicBP getSystolicBP() {
-        return (SystolicBP) systolicBP;
+        return systolicBP;
     }
     public void setDiastolicBP(int BP) {
         diastolicBP.setBP(BP);
     }
     public DiastolicBP getDiastolicBP() {
-        return (DiastolicBP) diastolicBP;
+        return diastolicBP;
     }
 
 

@@ -68,7 +68,7 @@
                 android:layout_below="@id/heartRate"
                 android:text="@string/comment"
                 android:ellipsize="end"
-                android:maxLength="20"
+                android:maxLength="29"
                 android:layout_marginLeft="5dp"
                 android:textSize="15sp" />
 

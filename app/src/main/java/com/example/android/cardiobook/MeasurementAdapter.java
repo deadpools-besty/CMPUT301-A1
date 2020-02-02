@@ -2,6 +2,7 @@ package com.example.android.cardiobook;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,6 +20,15 @@ public class MeasurementAdapter extends RecyclerView.Adapter<MeasurementAdapter.
 
     private Context mCtx;
     private List<Measurement> measurementList;
+    private OnItemClickListener mlistener;
+
+    public interface OnItemClickListener {
+        void onItemClick(int position);
+    }
+
+    public void setOnItemClickListener(OnItemClickListener listener) {
+        mlistener = listener;
+    }
 
     public MeasurementAdapter(Context mCtx, List<Measurement> measurementList) {
         this.mCtx = mCtx;
@@ -30,7 +40,7 @@ public class MeasurementAdapter extends RecyclerView.Adapter<MeasurementAdapter.
         //inflating and returning view holder
         LayoutInflater inflater = LayoutInflater.from(mCtx);
         View view = inflater.inflate(R.layout.card, null);
-        return new MeasurementViewHolder(view);
+        return new MeasurementViewHolder(view, mlistener);
     }
 
     @Override
@@ -75,11 +85,11 @@ public class MeasurementAdapter extends RecyclerView.Adapter<MeasurementAdapter.
         return measurementList.size();
     }
 
-    class MeasurementViewHolder extends RecyclerView.ViewHolder {
+    public class MeasurementViewHolder extends RecyclerView.ViewHolder {
 
         TextView mDate, mDia, mSys, mHR, mTime, mComment;
 
-        public MeasurementViewHolder(@NonNull View itemView) {
+        public MeasurementViewHolder(@NonNull View itemView, final OnItemClickListener listener) {
             super(itemView);
             mDate = itemView.findViewById(R.id.measDate);
             mTime = itemView.findViewById(R.id.Time);
@@ -87,6 +97,18 @@ public class MeasurementAdapter extends RecyclerView.Adapter<MeasurementAdapter.
             mSys = itemView.findViewById(R.id.sysBP);
             mHR = itemView.findViewById(R.id.heartRate);
             mComment = itemView.findViewById(R.id.Comment);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (listener != null) {
+                        int position = getAdapterPosition();
+                        if (position != RecyclerView.NO_POSITION) {
+                            listener.onItemClick(position);
+                        }
+                    }
+                }
+            });
 
         }
     }
