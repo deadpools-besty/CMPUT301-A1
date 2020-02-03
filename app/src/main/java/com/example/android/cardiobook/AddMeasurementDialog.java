@@ -66,6 +66,7 @@ public class AddMeasurementDialog extends DialogFragment {
         comment = view.findViewById(R.id.commentEditText);
 
         // Calendar stuff
+        // CodingWithMitch - Android Beginner Tutorial #25 - DatePicker Dialog [Choosing a Date from a Dialog Pop-Up] - https://www.youtube.com/watch?v=hwe1abDO2Ag
         Calendar cal = Calendar.getInstance();
         final int year = cal.get(Calendar.YEAR);
         final int month = cal.get(Calendar.MONTH);

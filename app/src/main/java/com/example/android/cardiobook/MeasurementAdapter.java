@@ -19,10 +19,13 @@ import java.util.List;
 
 public class MeasurementAdapter extends RecyclerView.Adapter<MeasurementAdapter.MeasurementViewHolder> {
 
+    //- Belal Khan - Android RecyclerView and CardView tutorial - https://www.simplifiedcoding.net/android-recyclerview-cardview-tutorial/
+
     private Context mCtx;
     private List<Measurement> measurementList;
     private OnItemClickListener mlistener;
 
+    // Coding in Flow - RecyclerView + CardView - Part 4 - ON-ITEM-CLICK INTERFACE - Android Studio Tutorial - https://www.youtube.com/watch?v=bhhs4bwYyhc
     public interface OnItemClickListener {
         void onItemClick(int position);
         void onDeleteClick(int position);
@@ -101,6 +104,7 @@ public class MeasurementAdapter extends RecyclerView.Adapter<MeasurementAdapter.
             mComment = itemView.findViewById(R.id.Comment);
             deleteImageView = itemView.findViewById(R.id.deleteButton);
 
+            // Coding in Flow - RecyclerView + CardView - Part 4 - ON-ITEM-CLICK INTERFACE - Android Studio Tutorial - https://www.youtube.com/watch?v=bhhs4bwYyhc
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -112,7 +116,7 @@ public class MeasurementAdapter extends RecyclerView.Adapter<MeasurementAdapter.
                     }
                 }
             });
-
+            // Coding in Flow - RecyclerView + CardView - Part 5 - CLICKING SPECIFIC ITEMS - Android Studio Tutorial - https://www.youtube.com/watch?v=HMjI7cLsyfw&list=PLrnPJCHvNZuBtTYUuc5Pyo4V7xZ2HNtf4&index=6&t=112s
             deleteImageView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

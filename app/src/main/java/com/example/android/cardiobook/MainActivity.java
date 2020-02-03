@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.AdapterView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -48,6 +49,7 @@ public class MainActivity extends AppCompatActivity implements AddMeasurementDia
             }
         });
 
+        // Belal Khan - Android RecyclerView and CardView tutorial - https://www.simplifiedcoding.net/android-recyclerview-cardview-tutorial/
         // build RecyclerView
         adapter = new MeasurementAdapter(this, measurements);
         recyclerView = findViewById(R.id.recycleView);
@@ -57,6 +59,7 @@ public class MainActivity extends AppCompatActivity implements AddMeasurementDia
         recyclerView.setAdapter(adapter);
 
         // itemclick listener to edit items
+        // Coding in Flow - RecyclerView + CardView - Part 4 - ON-ITEM-CLICK INTERFACE - Android Studio Tutorial - https://www.youtube.com/watch?v=bhhs4bwYyhc
         adapter.setOnItemClickListener(new MeasurementAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
@@ -70,7 +73,6 @@ public class MainActivity extends AppCompatActivity implements AddMeasurementDia
         });
 
     }
-
 
     // initialize add measurement dialog
     public void add() {
@@ -86,12 +88,14 @@ public class MainActivity extends AppCompatActivity implements AddMeasurementDia
     }
 
     public void remove(int position){
+        // Coding in Flow - RecyclerView + CardView - Part 5 - CLICKING SPECIFIC ITEMS - Android Studio Tutorial - https://www.youtube.com/watch?v=HMjI7cLsyfw&list=PLrnPJCHvNZuBtTYUuc5Pyo4V7xZ2HNtf4&index=6&t=112s
         measurements.remove(position);
         adapter.notifyItemRemoved(position);
         saveMeasurements();
     }
 
     private void saveMeasurements() {
+        // - Coding in Flow - How to Save an ArrayList of Custom Objects to SharedPreferences with Gson - Android Studio Tutorial - https://www.youtube.com/watch?time_continue=1&v=jcliHGR3CHo&feature=emb_logo
         sharedPreferences = getSharedPreferences("key", MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         Gson gson = new Gson();
@@ -102,7 +106,7 @@ public class MainActivity extends AppCompatActivity implements AddMeasurementDia
     }
 
     private void readMeasurements() {
-
+        // - Coding in Flow - How to Save an ArrayList of Custom Objects to SharedPreferences with Gson - Android Studio Tutorial - https://www.youtube.com/watch?time_continue=1&v=jcliHGR3CHo&feature=emb_logo
         sharedPreferences = getSharedPreferences("key", MODE_PRIVATE);
         Gson gson = new Gson();
         String json = sharedPreferences.getString("Measurements", null);
@@ -122,6 +126,7 @@ public class MainActivity extends AppCompatActivity implements AddMeasurementDia
         saveMeasurements();
     }
 
+    //handle onClickListener for edit measurement dialog fragment
     @Override
     public void onEditPressed(Measurement measurement) {
         measurements.set(editItemPosition, measurement);
