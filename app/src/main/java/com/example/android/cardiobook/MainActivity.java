@@ -60,11 +60,12 @@ public class MainActivity extends AppCompatActivity implements AddMeasurementDia
         adapter.setOnItemClickListener(new MeasurementAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
-                editItemPosition = position;
-                Measurement item = measurements.get(position);
-                FragmentTransaction fm = getSupportFragmentManager().beginTransaction();
-                EditMeasurementFragment measurementFragment = EditMeasurementFragment.newInstance(item);
-                measurementFragment.show(fm, "EDIT");
+                edit(position);
+            }
+
+            @Override
+            public void onDeleteClick(int position) {
+                remove(position);
             }
         });
 
@@ -77,8 +78,17 @@ public class MainActivity extends AppCompatActivity implements AddMeasurementDia
         addMeasurement.show(getSupportFragmentManager(), "Add");
     }
     public void edit(int position) {
+        editItemPosition = position;
+        Measurement item = measurements.get(position);
+        FragmentTransaction fm = getSupportFragmentManager().beginTransaction();
+        EditMeasurementFragment measurementFragment = EditMeasurementFragment.newInstance(item);
+        measurementFragment.show(fm, "EDIT");
+    }
 
-
+    public void remove(int position){
+        measurements.remove(position);
+        adapter.notifyItemRemoved(position);
+        saveMeasurements();
     }
 
     private void saveMeasurements() {

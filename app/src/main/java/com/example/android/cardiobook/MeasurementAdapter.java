@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -24,6 +25,7 @@ public class MeasurementAdapter extends RecyclerView.Adapter<MeasurementAdapter.
 
     public interface OnItemClickListener {
         void onItemClick(int position);
+        void onDeleteClick(int position);
     }
 
     public void setOnItemClickListener(OnItemClickListener listener) {
@@ -87,6 +89,7 @@ public class MeasurementAdapter extends RecyclerView.Adapter<MeasurementAdapter.
     public class MeasurementViewHolder extends RecyclerView.ViewHolder {
 
         TextView mDate, mDia, mSys, mHR, mTime, mComment;
+        ImageView deleteImageView;
 
         public MeasurementViewHolder(@NonNull View itemView, final OnItemClickListener listener) {
             super(itemView);
@@ -96,6 +99,7 @@ public class MeasurementAdapter extends RecyclerView.Adapter<MeasurementAdapter.
             mSys = itemView.findViewById(R.id.sysBP);
             mHR = itemView.findViewById(R.id.heartRate);
             mComment = itemView.findViewById(R.id.Comment);
+            deleteImageView = itemView.findViewById(R.id.deleteButton);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -104,6 +108,18 @@ public class MeasurementAdapter extends RecyclerView.Adapter<MeasurementAdapter.
                         int position = getAdapterPosition();
                         if (position != RecyclerView.NO_POSITION) {
                             listener.onItemClick(position);
+                        }
+                    }
+                }
+            });
+
+            deleteImageView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (listener != null) {
+                        int position = getAdapterPosition();
+                        if (position != RecyclerView.NO_POSITION) {
+                            listener.onDeleteClick(position);
                         }
                     }
                 }

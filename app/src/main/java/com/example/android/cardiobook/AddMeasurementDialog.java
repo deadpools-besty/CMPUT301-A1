@@ -72,8 +72,10 @@ public class AddMeasurementDialog extends DialogFragment {
         final int day = cal.get(Calendar.DAY_OF_MONTH);
         final int currentHour = cal.get(Calendar.HOUR_OF_DAY);
         final int currentMinute = cal.get(Calendar.MINUTE);
-        date.setText(year + "-" + month + "-" + day);
-        time.setText(currentHour + ":" + currentMinute);
+        String dateStr = String.format("%d-%02d-%02d", year, month + 1, day);
+        String timeStr = String.format("%02d:%02d", currentHour, currentMinute);
+        date.setText(dateStr);
+        time.setText(timeStr);
 
 
         // on click listener to be able to set the date
@@ -91,8 +93,8 @@ public class AddMeasurementDialog extends DialogFragment {
         dateSetListener = new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                month += 1;
-                String dateStr = year + "-" + month + "-" + dayOfMonth;
+
+                String dateStr = String.format("%d-%02d-%02d", year, month + 1, dayOfMonth);
                 date.setText(dateStr);
             }
         };
@@ -108,7 +110,7 @@ public class AddMeasurementDialog extends DialogFragment {
         timeSetListener = new TimePickerDialog.OnTimeSetListener() {
             @Override
             public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-                String timeStr = hourOfDay + ":" + minute;
+                String timeStr = String.format("%02d:%02d", hourOfDay, minute);
                 time.setText(timeStr);
             }
         };
