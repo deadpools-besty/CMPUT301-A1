@@ -87,7 +87,7 @@ public class EditMeasurementFragment extends DialogFragment {
         // Calendar stuff
         Calendar cal = Calendar.getInstance();
         final int year = cal.get(Calendar.YEAR);
-        final int month = cal.get(Calendar.MONTH) + 1;
+        final int month = cal.get(Calendar.MONTH);
         final int day = cal.get(Calendar.DAY_OF_MONTH);
         final int currentHour = cal.get(Calendar.HOUR_OF_DAY);
         final int currentMinute = cal.get(Calendar.MINUTE);
@@ -109,7 +109,7 @@ public class EditMeasurementFragment extends DialogFragment {
         dateSetListener = new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                String dateStr = year + "-" + month + "-" + dayOfMonth;
+                String dateStr = String.format("%d-%02d-%02d", year, month + 1, dayOfMonth);
                 date.setText(dateStr);
             }
         };
@@ -125,7 +125,7 @@ public class EditMeasurementFragment extends DialogFragment {
         timeSetListener = new TimePickerDialog.OnTimeSetListener() {
             @Override
             public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-                String timeStr = hourOfDay + ":" + minute;
+                String timeStr = String.format("%02d:%02d", hourOfDay, minute);
                 time.setText(timeStr);
             }
         };
@@ -156,18 +156,25 @@ public class EditMeasurementFragment extends DialogFragment {
                             int HRInt = Integer.valueOf(HR.getText().toString());
                             int dBPInt = Integer.valueOf(dBP.getText().toString());
                             int sBPInt = Integer.valueOf(sBP.getText().toString());
+                            measurementObject.setDate(dateStr);
+                            measurementObject.setTime(timeStr);
+                            measurementObject.setDiastolicBP(dBPInt);
+                            measurementObject.setSystolicBP(sBPInt);
+                            measurementObject.setHeartRate(HRInt);
 
                             if (comment.getText().toString().isEmpty()) {
-                                listener.onEditPressed(new Measurement(dateStr, timeStr, sBPInt, dBPInt, HRInt));
+                                listener.onEditPressed(measurementObject);
                             } else {
                                 String commentStr = comment.getText().toString();
-                                listener.onEditPressed(new Measurement(dateStr, timeStr, sBPInt, dBPInt, HRInt, commentStr));
+                                measurementObject.setComment(commentStr);
+                                listener.onEditPressed(measurementObject);
                             }
                         }
                     }
                 }).create();
 
     }
+
 
     private void setErrorMessages() {
         boolean validHR = HR.getText().toString().isEmpty();
