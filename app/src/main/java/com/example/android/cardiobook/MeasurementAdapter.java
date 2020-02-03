@@ -17,9 +17,10 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
+//- Belal Khan - Android RecyclerView and CardView tutorial - https://www.simplifiedcoding.net/android-recyclerview-cardview-tutorial/
 public class MeasurementAdapter extends RecyclerView.Adapter<MeasurementAdapter.MeasurementViewHolder> {
 
-    //- Belal Khan - Android RecyclerView and CardView tutorial - https://www.simplifiedcoding.net/android-recyclerview-cardview-tutorial/
+
 
     private Context mCtx;
     private List<Measurement> measurementList;
@@ -62,8 +63,8 @@ public class MeasurementAdapter extends RecyclerView.Adapter<MeasurementAdapter.
         holder.mTime.setText(measurement.getTime());
 
         // View binding for diastolic and systolic BP
-        String diaBP = "Diastolic Blood Pressure: " + measurement.getDiastolicBP().getBP();
-        String sysBP = "Systolic Blood Pressure: " + measurement.getSystolicBP().getBP();
+        String diaBP = "Diastolic Blood Pressure: " + measurement.getDiastolicBP().getBP() + " mm Hg";
+        String sysBP = "Systolic Blood Pressure: " + measurement.getSystolicBP().getBP() + " mm Hg";
         holder.mDia.setText(diaBP);
         holder.mSys.setText(sysBP);
 
@@ -76,7 +77,7 @@ public class MeasurementAdapter extends RecyclerView.Adapter<MeasurementAdapter.
         }
 
         // View binding for heart rate
-        String HR = "Heart rate: " + measurement.getHeartRate();
+        String HR = "Heart rate: " + measurement.getHeartRate() + " bpm";
         holder.mHR.setText(HR);
 
         // View binding for the comment
